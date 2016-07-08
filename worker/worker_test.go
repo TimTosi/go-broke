@@ -124,6 +124,7 @@ func TestWorker_Receive_singleWorker(t *testing.T) {
 	m, _ := json.Marshal(*queue.NewMessage(1, "Yo !"))
 	go dummy.send(string(m))
 	msg, err := w.Receive()
+	ensure.Nil(t, err)
 
 	ensure.DeepEqual(t, msg.ID, 1)
 	ensure.DeepEqual(t, msg.Msg, "Yo !")
@@ -147,7 +148,9 @@ func TestWorker_Receive_multipleWorkers(t *testing.T) {
 		dummy.send(string(m2))
 	}()
 	msg1, err := w1.Receive()
+	ensure.Nil(t, err)
 	msg2, err := w2.Receive()
+	ensure.Nil(t, err)
 
 	ensure.DeepEqual(t, msg1.ID, 1)
 	ensure.DeepEqual(t, msg1.Msg, "Yo !")
