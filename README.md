@@ -5,62 +5,49 @@
 
 
 ## Overview
-go-broke is an out-of-the-box message passing tool built on top of [zmq4](https://github.com/pebbe/zmq4),
+go-broke is a Go package that provides an out-of-the-box message passing tool built on top of [zmq4](https://github.com/pebbe/zmq4),
 the latest Golang implementation of the ZeroMQ library by [pebbe](https://github.com/pebbe).
 
 go-broke provides:
 * Lightweight Broker object that relies on zmq Router socket.
 * Lightweight Worker object that relies on zmq Dealer socket.
-* Automatic reemission of messages after a configurable ammount of time.
+* Automatic reemission of messages after a configurable amount of time.
 
 ## Getting Started
 First of all, you need to install and configure [ZeroMQ](http://zeromq.org/) on your machine.
 Check the [install.sh](https://github.com/TimTosi/go-broke/blob/master/install.sh) script for help.
 
-Then:
-    go get github.com/pebbe/zmq4
+Then go get this repository:
+
+```golang
+go get github.com/timtosi/go-broke
+```
 
 ## Usage
 The smallest helloworld of this tool looks like that:
 
-# Broker
-```golang
-func init() {
-	if len(os.Args) < 2 {
-		log.Fatal("Not enough arguments.\n")
-	}
-}
-
-// -----------------------------------------------------------------------------
-
+### Broker
+```go
 func main() {
-	b, err := broker.NewZMQBroker(fmt.Sprintf("tcp://*:%s", os.Args[1]))
+	b, err := broker.NewZMQBroker("tcp://*:6767")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	workChan := make(chan *queue.Message)
-	go b.Run(5*time.Millisecond, workChan)
+	go b.Run(50*time.Millisecond, workChan)
 
 	for i := 1; ; i++ {
-		fmt.Println("--------NEW MESSAGE SENT IN WORCHAN--------")
 		workChan <- queue.NewMessage(i, "Yo")
+		fmt.Println("--------NEW MESSAGE SENT IN WORCHAN--------")		
 	}
 }
 ```
 
-# Worker
-```golang
-func init() {
-	if len(os.Args) < 2 {
-		log.Fatal("Not enough arguments.\n")
-	}
-}
-
-// -----------------------------------------------------------------------------
-
+### Worker
+```go
 func main() {
-	w, err := worker.NewZMQWorker(fmt.Sprintf("tcp://127.0.0.1:%s", os.Args[1]), "1")
+	w, err := worker.NewZMQWorker("tcp://127.0.0.1:6767", "1")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -77,6 +64,12 @@ func main() {
 
 }
 ```
+
+## Complete Examples
+### Broker
+[example/broker](https://github.com/TimTosi/go-broke/blob/master/examples/broker/main.go)
+### Worker
+[example/worker](https://github.com/TimTosi/go-broke/blob/master/examples/worker/main.go)
 
 ## Docs
 [godoc](https://godoc.org/github.com/timtosi/go-broke)
