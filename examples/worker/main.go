@@ -11,10 +11,15 @@ import (
 
 // -----------------------------------------------------------------------------
 
-func main() {
+func init() {
 	if len(os.Args) < 2 {
 		log.Fatal("Not enough arguments.\n")
 	}
+}
+
+// -----------------------------------------------------------------------------
+
+func main() {
 	wq1, err := worker.NewZMQWorker(fmt.Sprintf("tcp://127.0.0.1:%s", os.Args[1]), "1")
 	if err != nil {
 		log.Fatal(err)
@@ -32,7 +37,7 @@ func main() {
 		for {
 			workerID, _ := w.Identity()
 			if msg, err := w.Receive(); err == nil {
-				fmt.Printf("Woker %s - Message Received: %v\n", workerID, msg)
+				fmt.Printf("Worker %s - Message Received: %v\n", workerID, msg)
 			} else {
 				fmt.Printf("Worker %s - BUG HERE %v\n", workerID, err)
 			}
