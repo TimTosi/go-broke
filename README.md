@@ -65,14 +65,10 @@ func main() {
 }
 ```
 
-## Complete Examples
-### Broker
-[example/broker](https://github.com/TimTosi/go-broke/blob/master/examples/broker/main.go)
-### Worker
-[example/worker](https://github.com/TimTosi/go-broke/blob/master/examples/worker/main.go)
-
-## Docs
+## Documentation and Complete Examples
 [godoc](https://godoc.org/github.com/timtosi/go-broke)
+[example/broker](https://github.com/TimTosi/go-broke/blob/master/examples/broker/main.go)
+[example/worker](https://github.com/TimTosi/go-broke/blob/master/examples/worker/main.go)
 
 ## License
 This library is released under the [MIT License](http://opensource.org/licenses/MIT)
