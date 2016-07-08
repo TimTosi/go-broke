@@ -30,7 +30,7 @@ func main() {
 	go b.Run(5*time.Millisecond, workChan)
 
 	for i := 1; ; i++ {
-		fmt.Println("--------NEW MESSAGE SENT IN WORCHAN--------")
 		workChan <- queue.NewMessage(i, "Yo")
+		fmt.Println("--------NEW MESSAGE SENT IN WORCHAN--------")
 	}
 }
