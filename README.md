@@ -76,4 +76,4 @@ func main() {
 This library is released under the [MIT License](http://opensource.org/licenses/MIT)
 
 ## Not Good Enough ?
-Help me to improve by sending your thoughts !
+Help me to improve by sending your thoughts to timothee.tosi@gmail.com !
