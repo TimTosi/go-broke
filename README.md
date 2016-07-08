@@ -67,7 +67,9 @@ func main() {
 
 ## Documentation and Complete Examples
 [godoc](https://godoc.org/github.com/timtosi/go-broke)
+
 [example/broker](https://github.com/TimTosi/go-broke/blob/master/examples/broker/main.go)
+
 [example/worker](https://github.com/TimTosi/go-broke/blob/master/examples/worker/main.go)
 
 ## License
