@@ -41,6 +41,7 @@ func main() {
 			} else {
 				fmt.Printf("Worker %s - BUG HERE %v\n", workerID, err)
 			}
+			time.Sleep(2 * time.Second)
 		}
 	}
 
